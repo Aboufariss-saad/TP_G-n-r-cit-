@@ -2,6 +2,10 @@ package Metier;
 
 import Metier.IMetier;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +59,20 @@ public class MetierProduitImpl implements IMetier<Produit> {
             }
         }
         produits.remove(P);
+
+    }
+
+    @Override
+    public void SaveAll() throws IOException {
+        File f1=new File("produitListe.txt");
+        FileOutputStream Fos=new FileOutputStream(f1);
+        ObjectOutputStream Oos=new ObjectOutputStream(Fos);
+        for(Produit p:produits){
+            Oos.writeObject(p+"\n");
+        }
+        System.out.println("successful");
+        Fos.close();
+        Oos.close();
 
     }
 

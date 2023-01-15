@@ -3,9 +3,11 @@ package Presentation;
 import Metier.MetierProduitImpl;
 import Metier.Produit;
 
+import java.io.*;
+import java.io.NotSerializableException;
 import java.util.Scanner;
 public class Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException,NotSerializableException {
         MetierProduitImpl metier = new MetierProduitImpl();
         int choix;
         do {
@@ -14,7 +16,8 @@ public class Application {
                     + "2. Rechercher un produit par son id.\n"
                     + "3. Ajouter un nouveau produit dans la liste.\n"
                     + "4. Supprimer un produit par id.\n"
-                    + "5. Quitter ce programme.\n";
+                    + "5. sauvgarder la liste des produits dans une fiichier.txt.\n"
+                    + "6. Quitter ce programme.\n";
             System.out.println(MENU);
             Scanner sc = new Scanner(System.in);
             choix = sc.nextInt();
@@ -61,7 +64,11 @@ public class Application {
                     long id3 = Sp.nextInt();
                     metier.delete(id3);
                     break;
+
                 case 5:
+                    metier.SaveAll();
+                    break;
+                case 6:
                     System.out.println("vous avez quiter l'application");
                     break;
                 default:
@@ -69,7 +76,7 @@ public class Application {
                     break;
 
             }
-        } while(choix!= 5);
+        } while(choix!= 6);
 
     }
 
